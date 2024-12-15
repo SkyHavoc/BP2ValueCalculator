@@ -346,12 +346,8 @@
                 { id: 64, name: 'Yellow Glowstick Sniper', price: 33000, color: '#00CED1', image: 'YellowGlowstickSniper.png' },
             ],
             cases: [
-                { id: 65, name: 'Early Access Case', price: 1499.99, color: '#FFD700', image: 'EarlyAccessCase.png' },
-                { id: 66, name: 'Haunted Case', price: 1299.99, color: '#663399', image: 'HauntedCase.png' },
-                { id: 67, name: 'Carbon Case', price: 999.99, color: '#2F4F4F', image: 'CarbonCase.png' },
-                { id: 68, name: 'Cyan Case', price: 799.99, color: '#00CED1', image: 'CyanCase.png' },
-                { id: 69, name: 'Contraband Case', price: 1999.99, color: '#FF4500', image: 'ContrabandCase.png' },
-                { id: 70, name: 'Elite Case', price: 1799.99, color: '#FFD700', image: 'EliteCase.png' }
+                { id: 65, name: 'Early Access Case', price: 8000000, color: '#FFD700', image: 'EarlyAccessCase.png' },
+                { id: 66, name: 'Haunted Case', price: 4000000, color: '#663399', image: 'HauntedCase.png' }
             ]
         };
 
@@ -393,6 +389,22 @@
                 </svg>`;
             }
             
+            // For cases, only show basic info and quantity controls
+            if (category === 'cases') {
+                card.innerHTML = `
+                    ${productContent}
+                    <h3>${product.name}</h3>
+                    <p class="price" id="price-${product.id}">${formatPrice(product.price)}</p>
+                    <div class="quantity-control">
+                        <button onclick="updateQuantity(${product.id}, -1)">-</button>
+                        <span class="quantity" id="quantity-${product.id}">0</span>
+                        <button onclick="updateQuantity(${product.id}, 1)">+</button>
+                    </div>
+                `;
+                return card;
+            }
+            
+            // For all other categories, keep the existing layout
             const maxLevel = maxLevels[category];
             
             card.innerHTML = `
